@@ -6,6 +6,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit2', '4.0')
 from gi.repository import Gtk, WebKit2
+import pkg_resources
 
 
 webkit_renderer = None
@@ -38,7 +39,8 @@ def main():
     global webkit_renderer
     global urlentry
     builder = Gtk.Builder()
-    builder.add_from_file("ui.glade")
+    glade_file = pkg_resources.resource_filename(__name__, 'ui.glade')
+    builder.add_from_file(glade_file)
     builder.connect_signals(Handler())
     window = builder.get_object("main_window")
 
